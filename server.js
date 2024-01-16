@@ -9,8 +9,15 @@ require("dotenv").config();
 const app = express();
 
 // connect to database
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log("DB connected"))
+.catch((err) => console.log("console error", err));
 
-// import routes
+// import route
+const blogPostRoutes= require("./routes/blogPost");
 
 // middlewares
 if (process.env.NODE_ENV === "development") {
@@ -23,6 +30,8 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 
 // route middleware
+app.use("/api", blogPostRoutes)
+
 
 // port
 const port = process.env.PORT || 8000;
