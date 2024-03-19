@@ -10,7 +10,7 @@ const blogPostSchema = new mongoose.Schema(
             type:String,
             required: true
         },
-        postedBy:{
+        postedBy:{ 
             type: String,
             default: "helena"
         }
